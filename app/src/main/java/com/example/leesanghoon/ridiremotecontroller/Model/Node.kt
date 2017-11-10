@@ -17,6 +17,7 @@ class Node(private val activity: MainActivity) : TransportListener {
     private var nodeId: Long = 0
     private val transport: Transport
 
+    private var receivedDatas: ByteArray = ByteArray(1024)
     private val links: ArrayList<Link> = ArrayList()
     private var framesCount = 0
 
@@ -42,16 +43,14 @@ class Node(private val activity: MainActivity) : TransportListener {
     }
 
     fun start() {
-        if (running)
-            return
+        if (running) return
 
         running = true
         transport.start()
     }
 
     fun stop() {
-        if (!running)
-            return
+        if (!running) return
 
         running = false
         transport.stop()
@@ -62,19 +61,19 @@ class Node(private val activity: MainActivity) : TransportListener {
             return
 
         ++framesCount
+        receivedDatas = frameData
+
         activity.refreshFrames()
 
         for (link in links)
             link.sendFrame(frameData)
     }
 
-    fun getLinks(): ArrayList<Link> {
-        return links
-    }
+    fun getLinks(): ArrayList<Link> = links
 
-    fun getFramesCount(): Int {
-        return framesCount
-    }
+    fun getFramesCount(): Int = framesCount
+
+    fun getFrames(): ByteArray = receivedDatas
 
     override fun transportNeedsActivity(transport: Transport, callback: ActivityCallback) {
         callback.accept(activity)
@@ -97,6 +96,7 @@ class Node(private val activity: MainActivity) : TransportListener {
 
     override fun transportLinkDidReceiveFrame(transport: Transport, link: Link, frameData: ByteArray) {
         ++framesCount
+        receivedDatas = frameData
         activity.refreshFrames()
     }
 }
