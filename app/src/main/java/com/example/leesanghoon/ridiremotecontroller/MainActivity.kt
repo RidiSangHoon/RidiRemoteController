@@ -11,7 +11,7 @@ class MainActivity : Activity() {
 
     private lateinit var node: com.example.leesanghoon.ridiremotecontroller.Model.Node
     private val peersTextView by lazy { findViewById<TextView>(R.id.peersTextView) }
-    private val framesTextView by lazy {findViewById<TextView> (R.id.peersTextView)}
+    private val framesTextView by lazy { findViewById<TextView>(R.id.peersTextView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

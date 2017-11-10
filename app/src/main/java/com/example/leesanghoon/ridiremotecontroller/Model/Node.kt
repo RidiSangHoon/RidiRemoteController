@@ -12,10 +12,6 @@ import io.underdark.util.nslogger.NSLogger
 import io.underdark.util.nslogger.NSLoggerAdapter
 import java.util.*
 
-
-/**
- * Created by leesanghoon on 2017. 11. 10..
- */
 class Node(private val activity: MainActivity) : TransportListener {
     private var running: Boolean = false
     private var nodeId: Long = 0
@@ -34,21 +30,14 @@ class Node(private val activity: MainActivity) : TransportListener {
         configureLogging()
         val kinds = EnumSet.of(TransportKind.WIFI)
 
-        this.transport = Underdark.configureTransport(
-                234235,
-                nodeId,
-                this,
-                null,
-                activity.applicationContext,
-                kinds
-        )
+        this.transport = Underdark.configureTransport(234235, nodeId, this,
+                null, activity.applicationContext, kinds)
     }
 
     private fun configureLogging() {
         val adapter = StaticLoggerBinder.singleton.loggerFactory.getLogger(Node::class.java.name) as NSLoggerAdapter
         adapter.logger = NSLogger(activity.applicationContext)
         adapter.logger.connect("192.168.5.203", 50000)
-
         Underdark.configureLogging(true)
     }
 
@@ -87,7 +76,6 @@ class Node(private val activity: MainActivity) : TransportListener {
         return framesCount
     }
 
-    //region TransportListener
     override fun transportNeedsActivity(transport: Transport, callback: ActivityCallback) {
         callback.accept(activity)
     }
@@ -111,5 +99,4 @@ class Node(private val activity: MainActivity) : TransportListener {
         ++framesCount
         activity.refreshFrames()
     }
-    //endregion
-} // Node
+}
