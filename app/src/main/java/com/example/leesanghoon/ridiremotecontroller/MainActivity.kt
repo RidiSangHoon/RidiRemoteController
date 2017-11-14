@@ -11,7 +11,7 @@ class MainActivity : Activity() {
 
     private lateinit var node: com.example.leesanghoon.ridiremotecontroller.Model.Node
     private val peersTextView by lazy { findViewById<TextView>(R.id.peersTextView) }
-    private val framesTextView by lazy { findViewById<TextView>(R.id.peersTextView) }
+    private val framesTextView by lazy { findViewById<TextView>(R.id.framesTextView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +34,13 @@ class MainActivity : Activity() {
     }
 
     fun leftBtnClicked(v: View) {
-        val sendMsg: String = "left"
+        val sendMsg = "left"
         val frameData = sendMsg.toByteArray(Charsets.UTF_8)
         node.broadcastFrame(frameData)
     }
 
     fun rightBtnClicked(v: View) {
-        val sendMsg: String = "right"
+        val sendMsg = "right"
         val frameData = sendMsg.toByteArray(Charsets.UTF_8)
         node.broadcastFrame(frameData)
     }
@@ -52,14 +52,7 @@ class MainActivity : Activity() {
     fun refreshFrames() {
         val frames = node.getFrames()
         val frameString = String(frames)
-        Log.e("MainActivity","Frame String => ${frameString}")
-
-        val links = node.getLinks()
-
-        for(link in links) {
-            Log.e("MainActivity","Link => ${link}")
-        }
-
-        framesTextView.text = "${node.getFramesCount()} frames"
+        Log.e("MainActivity", "Frame String => ${frameString}")
+        framesTextView.text = "${node.getFramesCount()} frames sent"
     }
 }
