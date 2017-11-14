@@ -16,7 +16,6 @@ class Node(private val activity: MainActivity) : TransportListener {
     private var running: Boolean = false
     private var nodeId: Long = 0
     private val transport: Transport
-
     private var receivedDatas: ByteArray = ByteArray(1024)
     private val links: ArrayList<Link> = ArrayList()
     private var framesCount = 0
@@ -27,10 +26,8 @@ class Node(private val activity: MainActivity) : TransportListener {
         } while (nodeId == 0L)
 
         if (nodeId < 0) nodeId = -nodeId
-
         configureLogging()
         val kinds = EnumSet.of(TransportKind.WIFI)
-
         this.transport = Underdark.configureTransport(234235, nodeId, this,
                 null, activity.applicationContext, kinds)
     }
@@ -44,14 +41,12 @@ class Node(private val activity: MainActivity) : TransportListener {
 
     fun start() {
         if (running) return
-
         running = true
         transport.start()
     }
 
     fun stop() {
         if (!running) return
-
         running = false
         transport.stop()
     }

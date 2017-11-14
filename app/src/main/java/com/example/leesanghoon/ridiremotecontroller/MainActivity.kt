@@ -33,8 +33,14 @@ class MainActivity : Activity() {
         node.stop()
     }
 
-    fun sendFrames(view: View) {
-        val sendMsg: String = "안녕하세요.dfadfadfadfadfdfadfadfad"
+    fun leftBtnClicked(v: View) {
+        val sendMsg: String = "left"
+        val frameData = sendMsg.toByteArray(Charsets.UTF_8)
+        node.broadcastFrame(frameData)
+    }
+
+    fun rightBtnClicked(v: View) {
+        val sendMsg: String = "right"
         val frameData = sendMsg.toByteArray(Charsets.UTF_8)
         node.broadcastFrame(frameData)
     }
@@ -44,15 +50,11 @@ class MainActivity : Activity() {
     }
 
     fun refreshFrames() {
-
-        var frames = node.getFrames()
-        Log.e("MainActicity","Frame count => ${frames.count()}")
-
+        val frames = node.getFrames()
         val frameString = String(frames)
         Log.e("MainActivity","Frame String => ${frameString}")
 
         val links = node.getLinks()
-        Log.e("MainActivity","Links Count => ${links.count()}")
 
         for(link in links) {
             Log.e("MainActivity","Link => ${link}")

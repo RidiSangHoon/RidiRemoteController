@@ -24,13 +24,23 @@
         android:text="0 frames"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/sendFramesButton"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/framesTextView"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:onClick="sendFrames"
-        android:text="Send frames" />
+        android:layout_centerHorizontal="true">
+        <Button
+            android:id="@+id/leftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="leftBtnClicked"
+            android:text="Left" />
+        <Button
+            android:id="@+id/rightBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="rightBtnClicked"
+            android:text="Right"/>
+    </LinearLayout>
 </RelativeLayout>
