@@ -9,7 +9,7 @@ import io.underdark.transport.TransportListener
 import io.underdark.transport.TransportListener.ActivityCallback
 import java.util.*
 
-class Node(private val activity: MainActivity) : TransportListener {
+class EpubPeerToPeer(private val activity: MainActivity) : TransportListener {
     private var running: Boolean = false
     private var nodeId: Long = 0
     private val transport: Transport
