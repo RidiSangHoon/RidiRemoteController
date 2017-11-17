@@ -4,15 +4,15 @@ import android.content.Context
 
 object PrefUtils {
 
-    fun getPrefLong(context: Context) : Long {
+    fun getPrefLong(context: Context,key: String) : Long {
         val pref = context.getSharedPreferences("p2pPref",Context.MODE_PRIVATE)
-        return pref.getLong("p2pNodeId",0)
+        return pref.getLong(key,0)
     }
 
-    fun setPrefLong(context: Context, value: Long) {
+    fun setPrefLong(context: Context, key: String, value: Long) {
         val pref = context.getSharedPreferences("p2pPref",Context.MODE_PRIVATE)
         val editor = pref.edit()
-        editor.putLong("p2pNodeId",value)
+        editor.putLong(key,value)
         editor.apply()
     }
 }
